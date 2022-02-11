@@ -1,0 +1,17 @@
+{
+  "name": "groupby-js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "source": "src/index.js",
+  "author": "Fábio França",
+  "description": "",
+  "keywords": [],
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  },
+  "license": "ISC"
+}
