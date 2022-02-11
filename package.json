@@ -6,7 +6,7 @@
   "author": "Fábio França",
   "description": "",
   "keywords": [],
-  "version": "1.0.3",
+  "version": "1.0.4",
   "devDependencies": {
     "typescript": "^4.5.5"
   },
