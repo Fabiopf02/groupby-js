@@ -7,9 +7,6 @@
   "description": "",
   "keywords": [],
   "version": "1.0.3",
-  "scripts": {
-    "build": "tsc"
-  },
   "devDependencies": {
     "typescript": "^4.5.5"
   },
