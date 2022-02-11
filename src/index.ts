@@ -1,6 +1,22 @@
 interface IOptions {
-  compare?: (value1: any, value2: any) => any;
-  formatTitle: (value: any) => string;
+  /**
+   * Função para comparar os valores
+   * A função padrão irá comparar as propriedades dos objetos pela key passada para {@link groupBy}
+   */
+  compare?: (value1: object, value2: object) => boolean;
+  /**
+   * Função para formatar os títulos dos grupos para os tipos 'objectWithKeys' e 'objects'
+   * `Por padrão utiliza o valor com propriedade 'key' do objeto`
+   */
+  formatTitle: (item: { [key: string]: any }, key: string) => string;
+  /**
+   * Tipo de agrupamento
+   * @description {title: object[], ...} objectWithKeys
+   * @description [{title: string, items: object[]}, ...] objects
+   * @description [object[]] arrays
+   *
+   * @default `type = objects`
+   */
   type: 'objectWithKeys' | 'objects' | 'arrays';
 }
 
@@ -18,7 +34,10 @@ function withObject(
     return group.title === keyValue;
   });
   if (!exists) {
-    return groups.push({ title: options.formatTitle(keyValue), items: [item] });
+    return groups.push({
+      title: options.formatTitle(item, key),
+      items: [item],
+    });
   }
   groups[groups.indexOf(exists)].items.push(item);
 }
@@ -63,10 +82,10 @@ function objectWithKeys(
     return String(item[key]) === _key;
   });
   if (!exists) {
-    groups[options.formatTitle(item[key])] = [item];
+    groups[options.formatTitle(item, key)] = [item];
     return groups;
   }
-  groups[options.formatTitle(item[key])].push(item);
+  groups[options.formatTitle(item, key)].push(item);
   return groups;
 }
 
@@ -76,12 +95,36 @@ const functions = {
   objectWithKeys: objectWithKeys,
 };
 
+/**
+ * @default
+ */
 const defaultOptions: IOptions = {
-  formatTitle: (value) => value,
+  formatTitle: (object, key) => object[key],
   type: 'objects',
 };
 
-export function groupBy(key: string, array: any[], options: IOptions) {
+/**
+ * @description Função para agrupar listas de objetos
+ */
+export function groupBy(
+  /**
+   * A propriedade de referência dos objetos para agrupamento
+   */
+  key: string,
+  /**
+   * A lista de objetos que será agrupada
+   */
+  array: any[],
+  options?: IOptions
+) {
+  if (!key) {
+    throw new Error('É necessário fornecer uma key válida!');
+  }
+  if (Object.prototype.toString.call(array) !== '[object Array]') {
+    throw new Error(
+      `O array de tipo '${Object.prototype.toString.call(array)}' é inválido`
+    );
+  }
   Object.assign(defaultOptions, options);
   const { type } = defaultOptions;
   const groups = type === 'objectWithKeys' ? {} : [];
