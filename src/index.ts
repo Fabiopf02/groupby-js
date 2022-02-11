@@ -1,5 +1,5 @@
 interface IOptions {
-  convert: (value: any) => any;
+  compare?: (value1: any, value2: any) => any;
   formatTitle: (value: any) => string;
   type: 'objectWithKeys' | 'objects' | 'arrays';
 }
@@ -11,10 +11,12 @@ function withObject(
   options: IOptions
 ) {
   const keyValue = item[key];
-  const exists = groups.find(
-    (group: { title: string }) =>
-      options.convert(group.title) === options.convert(keyValue)
-  );
+  const exists = groups.find((group: any) => {
+    if (options.compare) {
+      return options.compare(group, item);
+    }
+    return group.title === keyValue;
+  });
   if (!exists) {
     return groups.push({ title: options.formatTitle(keyValue), items: [item] });
   }
@@ -29,9 +31,12 @@ function withArrays(
 ): any[][] {
   const keyValue = item[key];
   const exists = groups.find((items: any[]) =>
-    items.find(
-      (_item) => options.convert(_item[key]) === options.convert(keyValue)
-    )
+    items.find((_item) => {
+      if (options.compare) {
+        return options.compare(_item, item);
+      }
+      return String(keyValue) === _item[key];
+    })
   );
   if (!exists) {
     groups.push([item]);
@@ -48,9 +53,15 @@ function objectWithKeys(
   key: string,
   options: IOptions
 ): any {
-  const exists = Object.keys(groups).find(
-    (_key) => options.convert(String(item[key])) === options.convert(_key)
-  );
+  const exists = Object.keys(groups).find((_key) => {
+    if (options.compare) {
+      return options.compare(
+        { key: _key, value: groups[_key] },
+        { key, value: item }
+      );
+    }
+    return String(item[key]) === _key;
+  });
   if (!exists) {
     groups[options.formatTitle(item[key])] = [item];
     return groups;
@@ -66,7 +77,6 @@ const functions = {
 };
 
 const defaultOptions: IOptions = {
-  convert: (value) => value,
   formatTitle: (value) => value,
   type: 'objects',
 };
