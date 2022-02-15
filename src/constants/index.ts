@@ -30,5 +30,5 @@ export const defaultOptions: Options<Obj, Obj> = {
 export const functions = {
   objects: withObject,
   arrays: withArrays,
-  objectWithKeys: objectWithKeys,
+  objectWithKeys,
 };

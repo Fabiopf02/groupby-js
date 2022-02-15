@@ -2,11 +2,7 @@ export type WithObjectType = 'objects';
 export type WithArrayType = 'arrays';
 export type ObjectWithKeysType = 'objectWithKeys';
 
-export type Compare<O, I> = (
-  obj: O,
-  item: I,
-  key: string | number | symbol
-) => boolean;
+export type Compare<O, I> = (obj: O, item: I, key: string | number | symbol) => boolean;
 
 export type Options<O, I> = {
   /**

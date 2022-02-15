@@ -4,11 +4,7 @@ type Obj = {
   [key: string | number | symbol]: any;
 };
 
-export function defaultWithArraysCompare(
-  obj: Obj,
-  item: Obj,
-  key: string | number | symbol
-): boolean {
+export function defaultWithArraysCompare(obj: Obj, item: Obj, key: string | number | symbol): boolean {
   return obj[key] === String(item[key]);
 }
 
@@ -16,12 +12,12 @@ export function withArrays(
   groups: any,
   item: { [key: string | number | symbol]: any },
   key: string | number | symbol,
-  options: Omit<Options<Obj, Obj>, 'type'>
+  options: Omit<Options<Obj, Obj>, 'type'>,
 ) {
   const exists = groups.find((items: any[]) =>
     items.find((_item) => {
       return options.compare!(_item, item, key);
-    })
+    }),
   );
   if (!exists) {
     groups.push([item]);

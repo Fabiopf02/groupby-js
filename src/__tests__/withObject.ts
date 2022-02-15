@@ -16,13 +16,7 @@ describe('withObject', () => {
   test('Opção "compare"', () => {
     const item = data[0];
     const groups: any = [{ title: 'test1', items: [] }];
-    const { _item, _key, _obj, compare } = testFN(
-      'name',
-      withObject,
-      item,
-      groups,
-      'objects'
-    );
+    const { _item, _key, _obj, compare } = testFN('name', withObject, item, groups, 'objects');
     expect(groups).toStrictEqual(expected);
     expect(compare).toBeCalled();
     expect(_key).toBe('name');

@@ -4,11 +4,7 @@ type Obj = {
   [key: string | number | symbol]: any;
 };
 
-export function defaultWithObjectCompare(
-  obj: Obj,
-  item: Obj,
-  key: string | number | symbol
-): boolean {
+export function defaultWithObjectCompare(obj: Obj, item: Obj, key: string | number | symbol): boolean {
   return obj.title === item[key];
 }
 
@@ -16,7 +12,7 @@ export function withObject(
   groups: any,
   item: { [key: string | number | symbol]: any },
   key: string | number | symbol,
-  options: Omit<Options<Obj, Obj>, 'type'>
+  options: Omit<Options<Obj, Obj>, 'type'>,
 ) {
   const exists = groups.find((group: any) => {
     return options.compare!(group, item, key);
@@ -28,7 +24,6 @@ export function withObject(
     });
   }
   const index = groups.indexOf(exists);
-  if (options.maxByGroup && groups[index].items.length >= options.maxByGroup)
-    return;
+  if (options.maxByGroup && groups[index].items.length >= options.maxByGroup) return;
   groups[index].items.push(item);
 }

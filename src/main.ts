@@ -10,16 +10,8 @@ type Obj = {
 /**
  * @description Função para agrupar listas de objetos
  */
-export function groupBy<T>(
-  key: keyof T,
-  arrays: T[],
-  options?: Options<Obj, T>
-): any;
-export function groupBy<T, K>(
-  key: keyof T,
-  arrays: T[],
-  options?: Options<Type<K, T>, T>
-): Return<K, T>;
+export function groupBy<T>(key: keyof T, arrays: T[], options?: Options<Obj, T>): any;
+export function groupBy<T, K>(key: keyof T, arrays: T[], options?: Options<Type<K, T>, T>): Return<K, T>;
 export function groupBy<T>(
   /**
    * A propriedade de referência dos objetos para agrupamento
@@ -29,7 +21,7 @@ export function groupBy<T>(
    * A lista de objetos que será agrupada
    */
   array: any[],
-  options?: Options<Obj, Obj>
+  options?: Options<Obj, Obj>,
 ) {
   validate(key, array, options);
 
@@ -43,12 +35,12 @@ export function groupBy<T>(
   const fn = functions[type];
 
   if (!fn) {
-    throw `O tipo de agrupamento '${type}' não existe!`;
+    throw new Error(`O tipo de agrupamento '${type}' não existe!`);
   }
 
   array.forEach((item) => {
     if (!item[key]) {
-      throw `A key '${key}' informada não existe`;
+      throw new Error(`A key '${key}' informada não existe`);
     }
     fn(groups, item, key, defaultOptions);
   });

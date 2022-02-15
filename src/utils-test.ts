@@ -1,12 +1,6 @@
 import { defaultOptions } from '.';
 
-export function testFN(
-  key: string,
-  fn: any,
-  item: any,
-  groups: any,
-  type: string
-) {
+export function testFN(key: string, fn: any, item: any, groups: any, type: string) {
   let _key = '';
   let _item = '';
   let _obj = '';

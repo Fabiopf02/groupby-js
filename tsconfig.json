@@ -4,7 +4,7 @@
     "module": "commonjs",
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    "outDir": "build",
+    "outDir": "lib",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
 
@@ -13,7 +13,7 @@
   },
   "exclude": [
     "node_modules",
-    "build",
+    "lib",
     "src/__tests__",
     "src/utils-test.ts",
   ]

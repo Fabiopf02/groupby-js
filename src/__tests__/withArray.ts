@@ -16,13 +16,7 @@ describe('withArray', () => {
   test('Opção "compare"', () => {
     const item = data[0];
     const groups: any = [];
-    const { _key, compare } = testFN(
-      'name',
-      withArrays,
-      item,
-      groups,
-      'arrays'
-    );
+    const { _key, compare } = testFN('name', withArrays, item, groups, 'arrays');
     expect(groups).toStrictEqual(expected);
     expect(compare).not.toBeCalled();
     expect(_key).toBeFalsy();
