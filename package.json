@@ -26,9 +26,8 @@
     "build": "tsc",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm run test && npm run format && npm version patch",
-    "version": "npm run format && git add -A src",
+    "prepublish": "npm run format && npm run lint &&  npm run build && npm version patch && git add -A src",
+    "prepublishOnly": "npm run test && npm run format",
     "postversion": "git push && git push --tags"
   },
   "devDependencies": {
