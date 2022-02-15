@@ -9,21 +9,17 @@ export function defaultObjectWithKeysCompare(
   item: Obj,
   key: string | number | symbol
 ): boolean {
-  return obj.key === String(item[key]);
+  return String(obj.key) === String(item[key]);
 }
 
 export function objectWithKeys(
   groups: any,
   item: { [key: string | number | symbol]: any },
   key: string | number | symbol,
-  options: Options<Obj, Obj>
+  options: Omit<Options<Obj, Obj>, 'type'>
 ): any {
   const exists = Object.keys(groups).find((_key) => {
-    return options.compare!(
-      { key: _key, value: groups[_key] },
-      { key, value: item },
-      key
-    );
+    return options.compare!({ key: _key, value: groups[_key] }, item, key);
   });
   const index = options.formatTitle!(item, key);
   if (!exists) {
