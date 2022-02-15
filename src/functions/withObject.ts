@@ -16,7 +16,7 @@ export function withObject(
   groups: any,
   item: { [key: string | number | symbol]: any },
   key: string | number | symbol,
-  options: Options<Obj, Obj>
+  options: Omit<Options<Obj, Obj>, 'type'>
 ) {
   const exists = groups.find((group: any) => {
     return options.compare!(group, item, key);

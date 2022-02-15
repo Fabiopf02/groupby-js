@@ -16,7 +16,7 @@ export function withArrays(
   groups: any,
   item: { [key: string | number | symbol]: any },
   key: string | number | symbol,
-  options: Options<Obj, Obj>
+  options: Omit<Options<Obj, Obj>, 'type'>
 ): any[][] {
   const exists = groups.find((items: any[]) =>
     items.find((_item) => {
