@@ -27,5 +27,8 @@ export function withObject(
       items: [item],
     });
   }
-  groups[groups.indexOf(exists)].items.push(item);
+  const index = groups.indexOf(exists);
+  if (options.maxByGroup && groups[index].items.length >= options.maxByGroup)
+    return;
+  groups[index].items.push(item);
 }

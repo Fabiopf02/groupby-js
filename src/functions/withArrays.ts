@@ -17,7 +17,7 @@ export function withArrays(
   item: { [key: string | number | symbol]: any },
   key: string | number | symbol,
   options: Omit<Options<Obj, Obj>, 'type'>
-): any[][] {
+) {
   const exists = groups.find((items: any[]) =>
     items.find((_item) => {
       return options.compare!(_item, item, key);
@@ -28,6 +28,6 @@ export function withArrays(
     return groups;
   }
   const index = groups.indexOf(exists);
+  if (options.maxByGroup && groups[index].length >= options.maxByGroup) return;
   groups[index].push(item);
-  return groups;
 }

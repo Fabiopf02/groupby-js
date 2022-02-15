@@ -1,8 +1,8 @@
-export function validate(
-  key: string,
-  array: any,
-  options?: { [key: string]: any }
-) {
+import { Options } from './types';
+
+type Obj = { [key: string | number | symbol]: any };
+
+export function validate(key: string, array: any, options?: Options<Obj, Obj>) {
   if (!key) {
     throw 'É necessário fornecer uma key válida!';
   }
@@ -22,5 +22,12 @@ export function validate(
     Object.prototype.toString.call(options.formatTitle) !== '[object Function]'
   ) {
     throw "O valor da opção 'formatTitle' deve ser uma função";
+  }
+  if (
+    options?.maxByGroup &&
+    (Object.prototype.toString.call(options.maxByGroup) !== '[object Number]' ||
+      Number(options.maxByGroup) <= 0)
+  ) {
+    throw 'maxByGroup deve ser um número inteiro maior que zero';
   }
 }

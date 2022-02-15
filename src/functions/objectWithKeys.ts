@@ -17,15 +17,14 @@ export function objectWithKeys(
   item: { [key: string | number | symbol]: any },
   key: string | number | symbol,
   options: Omit<Options<Obj, Obj>, 'type'>
-): any {
+) {
   const exists = Object.keys(groups).find((_key) => {
     return options.compare!({ key: _key, value: groups[_key] }, item, key);
   });
   const index = options.formatTitle!(item, key);
   if (!exists) {
-    groups[index] = [item];
-    return groups;
+    return (groups[index] = [item]);
   }
+  if (options.maxByGroup && groups[index].length >= options.maxByGroup) return;
   groups[index].push(item);
-  return groups;
 }

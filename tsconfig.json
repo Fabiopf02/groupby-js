@@ -13,7 +13,7 @@
   },
   "exclude": [
     "node_modules",
-    "dist",
+    "build",
     "src/__tests__",
     "src/utils-test.ts",
   ]

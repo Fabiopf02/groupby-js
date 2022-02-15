@@ -28,6 +28,10 @@ export type Options<O, I> = {
    * @default `type = objects`
    */
   type: ObjectWithKeysType | WithArrayType | WithObjectType;
+  /**
+   * Quantidade máxima de itens por grupo
+   */
+  maxByGroup?: number;
 };
 
 export type WithObjectReturn<T> = {

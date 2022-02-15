@@ -21,10 +21,8 @@ describe('withObject', () => {
       withObject,
       item,
       groups,
-
       'objects'
     );
-
     expect(groups).toStrictEqual(expected);
     expect(compare).toBeCalled();
     expect(_key).toBe('name');

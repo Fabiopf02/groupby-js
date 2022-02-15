@@ -51,10 +51,17 @@ npm i groupby-js
             *   Por padrão utiliza como 'título' o valor da propriedade 'key'
             *   ** Funciona apenas para type = 'objects' e type = 'objectWithKeys' **
             */
-            formatTitle?: (item: T, key: string = param key) => string
+            formatTitle?: (item: T, key: string = param key) => string,
                 // obj -> elemento do array já agrupado
                 // item -> elemento do array 'data' que será agrupado
                 // key -> A mesma key passada para groupBy
+
+            /*
+            *   * Opcional *
+            *   Quantidade máxima de itens por grupo
+            *   -> Deve ser um inteiro maior que zero
+            */
+            maxByGroup?: number
         })
 ```
 #### Typescript
@@ -94,7 +101,7 @@ const data = [
 ]
 
 // javascript
-const groups = groupBy('group', data, { type: 'objects' })
+const groups = groupBy('group', data, { type: 'objects', maxByGroup: 1 })
 
 // typescript
 import { WithObjectType } from 'groupby-js'
@@ -103,7 +110,7 @@ type Data = {
     name: string
     group: string
 }
-const groups = groupBy<Data, WithObjectType>('group', data, { type: 'objects' })
+const groups = groupBy<Data, WithObjectType>('group', data, { type: 'objects', maxByGroup: 1 })
 
 console.log(groups)
 // retorno
@@ -112,7 +119,6 @@ console.log(groups)
         title: 'g1',
         items: [
             { name: 'test1', group: 'g1' },
-            { name: 'test3', group: 'g1' },
         ],
     },
     {
@@ -136,7 +142,7 @@ const data = [
 ]
 
 // javascript
-const groups = groupBy('group', data, { type: 'arrays' })
+const groups = groupBy('group', data, { type: 'arrays', maxByGroup: 1 })
 
 // typescript
 import { WithArrayType } from 'groupby-js'
@@ -145,14 +151,13 @@ type Data = {
     name: string
     group: string
 }
-const groups = groupBy<Data, WithArrayType>('group', data, { type: 'arrays' })
+const groups = groupBy<Data, WithArrayType>('group', data, { type: 'arrays', maxByGroup: 1 })
 
 console.log(groups)
 // retorno
 [
      [
         { name: 'test1', group: 'g1' },
-        { name: 'test3', group: 'g1' },
     ],
     [
         { name: 'test2', group: 'g2' },
@@ -172,7 +177,7 @@ const data = [
 ]
 
 // javascript
-const groups = groupBy('group', data, { type: 'objectWithKeys' })
+const groups = groupBy('group', data, { type: 'objectWithKeys', maxByGroup: 1 })
 
 // typescript
 import { ObjectWithKeysType } from 'groupby-js'
@@ -181,14 +186,13 @@ type Data = {
     name: string
     group: string
 }
-const groups = groupBy<Data, ObjectWithKeysType>('group', data, { type: 'objectWithKeys' })
+const groups = groupBy<Data, ObjectWithKeysType>('group', data, { type: 'objectWithKeys', maxByGroup: 1 })
 
 console.log(groups)
 // retorno
 [
     'g1': [
         { name: 'test1', group: 'g1' },
-        { name: 'test3', group: 'g1' },
     ],
     'g2': [
         { name: 'test2', group: 'g2' },
