@@ -2,8 +2,6 @@
 
 #### _Agrupador de array de objetos por propriedade_
 
-[![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
-
 ## Features
 
 - Agrupar em objetos com 'title' e 'items' -> `<T>{ title: string, items: T[] }[] // Type = WithObjectType`
