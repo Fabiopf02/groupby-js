@@ -17,19 +17,13 @@
     "ts",
     "typescript"
   ],
-  "version": "1.1.8",
-  "files": [
-    "lib/**/*"
-  ],
+  "version": "1.1.4",
+  "files": ["lib/**/*"],
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "publish": "npm version patch && npm publish",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json",
-    "prepublish": "npm run format && npm run lint &&  npm run build && git add -A src",
-    "prepublishOnly": "npm run test && npm run format",
-    "postversion": "git push && git push --tags"
+    "lint": "tslint -p tsconfig.json"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
