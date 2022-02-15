@@ -94,7 +94,7 @@ const data = [
 ]
 
 // javascript
-const groups = groupBy('group', data, { type='objects' })
+const groups = groupBy('group', data, { type: 'objects' })
 
 // typescript
 import { WithObjectType } from 'groupby-js'
@@ -103,7 +103,7 @@ type Data = {
     name: string
     group: string
 }
-const groups = groupBy<Data, WithObjectType>('group', data, { type='objects' })
+const groups = groupBy<Data, WithObjectType>('group', data, { type: 'objects' })
 
 console.log(groups)
 // retorno
@@ -136,7 +136,7 @@ const data = [
 ]
 
 // javascript
-const groups = groupBy('group', data, { type='arrays' })
+const groups = groupBy('group', data, { type: 'arrays' })
 
 // typescript
 import { WithArrayType } from 'groupby-js'
@@ -145,7 +145,7 @@ type Data = {
     name: string
     group: string
 }
-const groups = groupBy<Data, WithArrayType>('group', data, { type='arrays' })
+const groups = groupBy<Data, WithArrayType>('group', data, { type: 'arrays' })
 
 console.log(groups)
 // retorno
@@ -172,7 +172,7 @@ const data = [
 ]
 
 // javascript
-const groups = groupBy('group', data, { type='objectWithKeys' })
+const groups = groupBy('group', data, { type: 'objectWithKeys' })
 
 // typescript
 import { ObjectWithKeysType } from 'groupby-js'
@@ -181,7 +181,7 @@ type Data = {
     name: string
     group: string
 }
-const groups = groupBy<Data, ObjectWithKeysType>('group', data, { type='objectWithKeys' })
+const groups = groupBy<Data, ObjectWithKeysType>('group', data, { type: 'objectWithKeys' })
 
 console.log(groups)
 // retorno
